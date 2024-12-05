@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Much Love Boole</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+        body {
+            font-family: 'Pacifico', cursive;
+            background-color: #ffe6f2;
+            background-size: 100px 100px;
+            background-repeat: repeat;
+            position: relative;
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            opacity: 0.25; /* Background opacity */
+            z-index: 0;
+        }
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 30px 20px;
+            color: #0044cc;
+        }
+        h1 {
+            font-size: 3.5em;
+            background: -webkit-linear-gradient(#ff66b2, #66ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(255, 182, 193, 0.8);
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 2em;
+            color: #0044cc;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: inline-block;
+            padding: 15px 25px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            margin: 10px 0;
+        }
+        .emojis {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .emoji {
+            width: 80px;
+            height: 80px;
+        }
+        .hug {
+            margin-top: 30px;
+            padding: 20px 40px;
+            background-color: #ff66b2;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 1.8em;
+            cursor: pointer;
+            box-shadow: 0 6px rgba(204, 0, 102, 0.8);
+            transition: all 0.3s ease-in-out;
+        }
+        .hug:hover {
+            background-color: #ff85c2;
+            transform: scale(1.1);
+        }
+        .hug:active {
+            box-shadow: 0 4px rgba(204, 0, 102, 0.8);
+            transform: translateY(2px);
+        }
+
+        /* Flying Emojis Animation */
+        .fly-emoji {
+            position: absolute;
+            animation: fly 3s ease-in-out forwards;
+            z-index: 1000;
+        }
+
+        @keyframes fly {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate(calc(200px - 50vw), calc(-500px - 50vh)) scale(0.5);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="emojis">
+            <img src="https://media.giphy.com/media/26AHONQ79FdWZhAI0/giphy.gif" class="emoji" alt="heart emoji">
+            <img src="https://media.giphy.com/media/3o6ZsZxNRWkZIqwUU4/giphy.gif" class="emoji" alt="pig emoji">
+            <img src="https://media.giphy.com/media/l4FGI8GoTL7N4DsyI/giphy.gif" class="emoji" alt="ghost emoji">
+        </div>
+        <h1>Much Love, Boole!</h1>
+        <p>Here you have your free hug from me.</p>
+        <p>If I had done any childish mischief, I'm really sorry for that.</p>
+        <button class="hug" onclick="flyEmojis()">Receive Hug</button>
+    </div>
+
+    <script>
+        function flyEmojis() {
+            const emojis = ['❤️', '🐷', '👻', '🐷', '❤️'];
+            for (let i = 0; i < 10; i++) {
+                const emoji = document.createElement('div');
+                emoji.classList.add('fly-emoji');
+                emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                emoji.style.left = `${Math.random() * 100}vw`;
+                emoji.style.top = `${Math.random() * 100}vh`;
+                emoji.style.fontSize = `${Math.random() * 2 + 1}em`;
+                document.body.appendChild(emoji);
+
+                // Remove the emoji after animation ends
+                emoji.addEventListener('animationend', () => {
+                    emoji.remove();
+                });
+            }
+        }
+    </script>
+</body>
+</html>
